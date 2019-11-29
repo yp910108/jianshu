@@ -1,5 +1,4 @@
-const defaultState = {}
+import { combineReducers } from 'redux'
+import { reducer as header } from './header'
 
-export default (state = defaultState, action) => {
-  return state
-}
+export default combineReducers({ header })
