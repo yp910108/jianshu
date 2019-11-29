@@ -1,4 +1,4 @@
-import * as types from './actionTypes'
+import { header as types } from '../actionTypes'
 
 const defaultState = {
   focused: false
