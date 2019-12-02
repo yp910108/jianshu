@@ -131,8 +131,12 @@ export const SearchInfoTitleRefresh = styled.span`
   cursor: pointer;
   user-select: none;
   .iconfont {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 1px;
     margin-right: 5px;
     font-size: 12px;
+    transition: all 0.2s ease-in;
   }
 `
 export const SearchInfoList = styled.ul`
@@ -149,6 +153,10 @@ export const SearchInfoItem = styled.li`
   font-size: 12px;
   color: #888;
   cursor: pointer;
+  &:hover {
+    border-color: #666;
+    color: #666;
+  }
 `
 export const Addition = styled.div`
   float: right;

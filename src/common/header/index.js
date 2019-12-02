@@ -34,8 +34,8 @@ class Header extends Component {
         <SearchInfo onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
           <SearchInfoTitle>
             热门搜索
-            <SearchInfoTitleRefresh onClick={() => handlePageChange(++pageNo)}>
-              <i className="iconfont iconrefresh"></i>换一批
+            <SearchInfoTitleRefresh onClick={() => handlePageChange(++pageNo, this.iconSpin)}>
+              <i ref={(icon) => (this.iconSpin = icon)} className="iconfont iconrefresh"></i>换一批
             </SearchInfoTitleRefresh>
           </SearchInfoTitle>
           <SearchInfoList>{eleList}</SearchInfoList>
@@ -46,7 +46,7 @@ class Header extends Component {
     }
   }
   render() {
-    const { focused, handleInputFocus, handleInputBlur } = this.props
+    const { focused, hotList, handleInputFocus, handleInputBlur } = this.props
     return (
       <HeaderWrapper>
         <HeaderContent>
@@ -67,7 +67,7 @@ class Header extends Component {
             <NavItem className="download-app">下载App</NavItem>
             <NavSearchWrapper className={focused ? 'focused' : ''}>
               <CSSTransition in={focused} timeout={500} classNames="slide">
-                <NavSearch placeholder="搜索" onFocus={handleInputFocus} onBlur={handleInputBlur} />
+                <NavSearch placeholder="搜索" onFocus={() => handleInputFocus(hotList)} onBlur={handleInputBlur} />
               </CSSTransition>
               <i className="iconfont iconsearch" />
               {this.getListArea(focused)}
@@ -90,8 +90,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleInputFocus() {
-      dispatch(actionCreator.getHotList())
+    handleInputFocus(list) {
+      if (list.size === 0) {
+        dispatch(actionCreator.getHotList())
+      }
       dispatch(actionCreator.searchFocus())
     },
     handleInputBlur() {
@@ -103,7 +105,10 @@ const mapDispatchToProps = (dispatch) => {
     mouseLeave() {
       dispatch(actionCreator.mouseLeave())
     },
-    handlePageChange(pageNo) {
+    handlePageChange(pageNo, icon) {
+      const degStr = icon.style.transform.replace(/[^-0-9]/gi, '')
+      const deg = parseInt(degStr || 0)
+      icon.style.transform = `rotate(${deg + 180}deg)`
       dispatch(actionCreator.pageChange(pageNo))
     }
   }
