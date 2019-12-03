@@ -100,12 +100,14 @@ export const NavSearch = styled.input`
 `
 export const SearchInfo = styled.div`
   position: absolute;
+  z-index: 1;
   top: 100%;
   left: 0;
   margin-top: 9px;
   border-radius: 4px;
   padding: 20px;
   width: 250px;
+  background: #fff;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   &:after {
     content: '';

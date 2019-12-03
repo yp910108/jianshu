@@ -35,7 +35,8 @@ class Header extends Component {
           <SearchInfoTitle>
             热门搜索
             <SearchInfoTitleRefresh onClick={() => handlePageChange(++pageNo, this.iconSpin)}>
-              <i ref={(icon) => (this.iconSpin = icon)} className="iconfont iconrefresh"></i>换一批
+              <i ref={(icon) => (this.iconSpin = icon)} className="iconfont iconrefresh" />
+              换一批
             </SearchInfoTitleRefresh>
           </SearchInfoTitle>
           <SearchInfoList>{eleList}</SearchInfoList>
@@ -79,7 +80,7 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapState = (state) => {
   return {
     focused: state.getIn(['header', 'focused']), // 等价于 focused: state.get('header').get('focused')
     mouseIn: state.getIn(['header', 'mouseIn']),
@@ -88,7 +89,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatch = (dispatch) => {
   return {
     handleInputFocus(list) {
       if (list.size === 0) {
@@ -114,4 +115,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapState, mapDispatch)(Header)

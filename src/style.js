@@ -56,7 +56,6 @@ body {
   height: 100%;
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
-  overflow: hidden;
 }
 
 *,
