@@ -30,7 +30,7 @@ class List extends Component {
               <ArticleItem key={article.id}>
                 <ArticleImg src={article.img} />
                 <ArticleInfo>
-                  <Link to="/detail">
+                  <Link to={`/detail/${article.id}`}>
                     <ArticleTitle>{article.title}</ArticleTitle>
                   </Link>
                   <ArticleDesc>{article.desc}</ArticleDesc>

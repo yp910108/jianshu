@@ -49,7 +49,7 @@ html {
   box-sizing: border-box;
   height: 100%;
   font-size: 14px;
-  color: #606266;
+  color: #404040;
 }
 
 body {

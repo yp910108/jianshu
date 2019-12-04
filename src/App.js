@@ -11,12 +11,8 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Header />
-        <Route path="/" exact>
-          <Home />
-        </Route>
-        <Route path="/detail" exact>
-          <Detail />
-        </Route>
+        <Route path="/" exact component={Home} />
+        <Route path="/detail/:id" exact component={Detail} />
       </BrowserRouter>
     </Provider>
   )
