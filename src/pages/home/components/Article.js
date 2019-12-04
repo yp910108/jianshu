@@ -1,44 +1,60 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { home as actionCreator } from '../../../store/actionCreators'
 import {
   ArticleWrapper,
+  ArticleList,
   ArticleItem,
+  ArticleInfo,
   ArticleTitle,
   ArticleDesc,
   ArticleImg,
   ArticleIconWrapper,
   ArticleDiamond,
   ArticleAuthor,
-  ArticleComment
+  ArticleComment,
+  LoadMore
 } from '../style'
 
 class List extends Component {
   render() {
-    const { articleList } = this.props
+    const { article, loadMore } = this.props
+    let { list, total, pageNo, pageSize } = article
+    const newList = list.slice(0, pageNo * pageSize)
     return (
       <ArticleWrapper>
-        {articleList.map((article) => {
-          return (
-            <ArticleItem key={article.id}>
-              <ArticleImg src={article.img} />
-              <ArticleTitle>{article.title}</ArticleTitle>
-              <ArticleDesc>{article.desc}</ArticleDesc>
-              <ArticleIconWrapper>
-                <ArticleDiamond>
-                  <i className="iconfont icondiamond" />
-                  {article.diamond}
-                </ArticleDiamond>
-                <ArticleAuthor>{article.author}</ArticleAuthor>
-                <ArticleComment>
-                  <i className="iconfont iconcomment" />
-                  {article.comment}
-                </ArticleComment>
-                <i className="iconfont iconfavorite" />
-                {article.favorite}
-              </ArticleIconWrapper>
-            </ArticleItem>
-          )
-        })}
+        <ArticleList>
+          {newList.map((article) => {
+            return (
+              <ArticleItem key={article.id}>
+                <ArticleImg src={article.img} />
+                <ArticleInfo>
+                  <Link to="/detail">
+                    <ArticleTitle>{article.title}</ArticleTitle>
+                  </Link>
+                  <ArticleDesc>{article.desc}</ArticleDesc>
+                  <ArticleIconWrapper>
+                    <ArticleDiamond>
+                      <i className="iconfont icondiamond" />
+                      {article.diamond}
+                    </ArticleDiamond>
+                    <ArticleAuthor>{article.author}</ArticleAuthor>
+                    <ArticleComment>
+                      <i className="iconfont iconcomment" />
+                      {article.comment}
+                    </ArticleComment>
+                    <i className="iconfont iconfavorite" />
+                    {article.favorite}
+                  </ArticleIconWrapper>
+                </ArticleInfo>
+              </ArticleItem>
+            )
+          })}
+        </ArticleList>
+        <LoadMore className={newList.length === total ? 'hide' : ''} onClick={() => loadMore(++pageNo)}>
+          阅读更多
+        </LoadMore>
       </ArticleWrapper>
     )
   }
@@ -46,8 +62,16 @@ class List extends Component {
 
 const mapState = (state) => {
   return {
-    articleList: state.getIn(['home', 'articleList']).toJS()
+    article: state.getIn(['home', 'article']).toJS()
   }
 }
 
-export default connect(mapState, null)(List)
+const mapDispatch = (dispatch) => {
+  return {
+    loadMore(pageNo) {
+      dispatch(actionCreator.articlePageChange(pageNo))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(List)

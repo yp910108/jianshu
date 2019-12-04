@@ -18,6 +18,22 @@ export const HomeRight = styled.div`
   right: 0;
   width: 280px;
 `
+export const BackTop = styled.div`
+  position: fixed;
+  z-index: 1040;
+  right: 40px;
+  bottom: 40px;
+  border: 1px solid #ccc;
+  width: 52px;
+  height: 52px;
+  line-height: 52px;
+  text-align: center;
+  cursor: pointer;
+  .iconfont {
+    display: inline-block;
+    transform: rotate(-90deg);
+  }
+`
 export const TopicWrapper = styled.ul`
   margin-left: -18px;
   padding: 20px 0 0;
@@ -40,26 +56,34 @@ export const TopicImg = styled.img`
   width: 30px;
   height: 30px;
 `
-export const ArticleWrapper = styled.ul``
+export const ArticleWrapper = styled.div``
+export const ArticleList = styled.ul``
 export const ArticleItem = styled.li`
   padding: 25px 0 20px;
   &:not(:last-child) {
     border-bottom: 1px solid #f0f0f0;
   }
 `
+export const ArticleInfo = styled.div`
+  margin-right: 160px;
+`
 export const ArticleTitle = styled.h2`
   font-weight: 500;
   font-size: 18px;
   color: #333;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `
 export const ArticleImg = styled.img`
   float: right;
+  border-radius: 4px;
   border: 1px solid #f0f0f0;
   width: 150px;
   height: 100px;
 `
 export const ArticleDesc = styled.div`
-  margin-right: 160px;
   padding: 10px 0;
   line-height: 24px;
   font-size: 13px;
@@ -87,6 +111,23 @@ export const ArticleAuthor = styled.span`
 `
 export const ArticleComment = styled.span`
   margin-right: 10px;
+`
+export const LoadMore = styled.div`
+  margin: 30px auto 60px;
+  border-radius: 20px;
+  padding: 13px 15px;
+  text-align: center;
+  font-size: 15px;
+  background-color: #a5a5a5;
+  color: #fff;
+  user-select: none;
+  cursor: pointer;
+  &:hover {
+    background-color: #9b9b9b;
+  }
+  &.hide {
+    display: none;
+  }
 `
 export const RecommendWrapper = styled.div``
 export const BoardWrapper = styled.div`

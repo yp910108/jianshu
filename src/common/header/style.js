@@ -11,12 +11,13 @@ export const HeaderContent = styled.div`
   margin: 0 auto;
   height: 56px;
 `
-export const Logo = styled.a`
+export const Logo = styled.span`
   float: left;
   width: 100px;
   height: 100%;
   background: url(${LogoPicture});
   background-size: contain;
+  cursor: pointer;
 `
 
 export const Nav = styled.div`

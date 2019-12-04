@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { header as actionCreator } from '../../store/actionCreators'
 import { CSSTransition } from 'react-transition-group'
@@ -51,7 +52,9 @@ class Header extends Component {
     return (
       <HeaderWrapper>
         <HeaderContent>
-          <Logo href="/" />
+          <Link to="/">
+            <Logo />
+          </Link>
           <Addition>
             <Button className="Aa">
               <i className="iconfont iconAa" />
@@ -64,7 +67,9 @@ class Header extends Component {
             </Button>
           </Addition>
           <Nav>
-            <NavItem className="home active">首页</NavItem>
+            <Link to="/">
+              <NavItem className="home active">首页</NavItem>
+            </Link>
             <NavItem className="download-app">下载App</NavItem>
             <NavSearchWrapper className={focused ? 'focused' : ''}>
               <CSSTransition in={focused} timeout={500} classNames="slide">
