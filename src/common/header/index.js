@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { header as actionCreator } from '../../store/actionCreators'
+import { login as actionCreatorLogin, header as actionCreator } from '../../store/actionCreators'
 import { CSSTransition } from 'react-transition-group'
 import {
   HeaderWrapper,
@@ -48,7 +48,7 @@ class Header extends Component {
     }
   }
   render() {
-    const { focused, hotList, handleInputFocus, handleInputBlur } = this.props
+    const { isLogin, logout, focused, hotList, handleInputFocus, handleInputBlur } = this.props
     return (
       <HeaderWrapper>
         <HeaderContent>
@@ -59,7 +59,15 @@ class Header extends Component {
             <Button className="Aa">
               <i className="iconfont iconAa" />
             </Button>
-            <Button className="login">登录</Button>
+            {isLogin ? (
+              <Button className="login" onClick={logout}>
+                退出
+              </Button>
+            ) : (
+              <Link to="/login">
+                <Button className="login">登录</Button>
+              </Link>
+            )}
             <Button className="register">注册</Button>
             <Button className="writing">
               <i className="iconfont iconfeather" />
@@ -87,6 +95,7 @@ class Header extends Component {
 
 const mapState = (state) => {
   return {
+    isLogin: state.getIn(['login', 'isLogin']),
     focused: state.getIn(['header', 'focused']), // 等价于 focused: state.get('header').get('focused')
     mouseIn: state.getIn(['header', 'mouseIn']),
     hotList: state.getIn(['header', 'hotList']),
@@ -96,6 +105,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
+    logout() {
+      dispatch(actionCreatorLogin.logout())
+    },
     handleInputFocus(list) {
       if (list.size === 0) {
         dispatch(actionCreator.getHotList())

@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import Header from '../../common/header'
 import { detail as actionCreator } from '../../store/actionCreators'
 import { DetailWrapper } from './style'
 
@@ -8,30 +9,33 @@ class Detail extends Component {
   render() {
     const { detailData } = this.props
     return (
-      <DetailWrapper>
-        <div className="container">
-          <h2 className="title">{detailData.title}</h2>
-          <div className="author-info">
-            <img className="avatar" src={detailData.avatar} alt="" />
-            <div className="info">
-              <div className="author">
-                {detailData.author}
-                <span className="favorite">关注</span>
-              </div>
-              <div className="desc">
-                <span className="diamond">
-                  <i className="iconfont icondiamond" />
-                  {detailData.diamond}
-                </span>
-                <span className="date">{detailData.date}</span>
-                <span className="font-number">{detailData.fontNumber}</span>
-                <span className="read-number">{detailData.readNumber}</span>
+      <Fragment>
+        <Header />
+        <DetailWrapper>
+          <div className="container">
+            <h2 className="title">{detailData.title}</h2>
+            <div className="author-info">
+              <img className="avatar" src={detailData.avatar} alt="" />
+              <div className="info">
+                <div className="author">
+                  {detailData.author}
+                  <span className="favorite">关注</span>
+                </div>
+                <div className="desc">
+                  <span className="diamond">
+                    <i className="iconfont icondiamond" />
+                    {detailData.diamond}
+                  </span>
+                  <span className="date">{detailData.date}</span>
+                  <span className="font-number">{detailData.fontNumber}</span>
+                  <span className="read-number">{detailData.readNumber}</span>
+                </div>
               </div>
             </div>
+            <div className="content" dangerouslySetInnerHTML={{ __html: detailData.content }}></div>
           </div>
-          <div className="content" dangerouslySetInnerHTML={{ __html: detailData.content }}></div>
-        </div>
-      </DetailWrapper>
+        </DetailWrapper>
+      </Fragment>
     )
   }
   componentDidMount() {
